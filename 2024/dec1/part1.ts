@@ -1,6 +1,6 @@
 import * as fs from 'fs';
 
-const file: string = fs.readFileSync("2024/puzzleInput/dec1.txt", "utf-8").trim();
+const file: string = fs.readFileSync("2024/input/dec1.txt", "utf-8").trim();
 
 const lines: string[] = file.split("\n");
 //Store both side in two list 

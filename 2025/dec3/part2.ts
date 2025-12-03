@@ -1,6 +1,6 @@
 import * as fs from 'fs';
 
-const file: string = fs.readFileSync("2025/puzzleInput/inputDec3.txt", 'utf-8');
+const file: string = fs.readFileSync("2025/input/dec3.txt", 'utf-8');
 const lines: string[] = file.split("\n");
 
 lines.forEach((line, index) => {

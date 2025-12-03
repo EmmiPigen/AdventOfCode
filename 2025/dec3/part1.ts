@@ -1,13 +1,13 @@
 import * as fs from 'fs';
 
-const file: string = fs.readFileSync("2025/puzzleInput/inputDec3.txt", 'utf-8');
+const file: string = fs.readFileSync("2025/input/dec3.txt", 'utf-8');
 const lines: string[] = file.split("\n");
 
 for (let i = 0; i < lines.length; i++){
   lines[i] = lines[i]?.replace(/[\r\n]+$/, '') ?? '';
 }
 
-console.log(lines);
+//console.log(lines);
 let maxJolt:number[] = [];
 
 for(const line of lines) {

@@ -1,6 +1,6 @@
 # Ignore all files in the puzzleInput directories
-2025/puzzleInput/
-2024/puzzleInput/
+2025/input/
+2024/input/
 
 
 #Ignore TypeScript project files

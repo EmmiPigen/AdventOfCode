@@ -4,7 +4,7 @@ def circular_index(index, step):
   return (index + step + n) % n
 
 
-with open("2025\puzzleInput\inputDec1.txt", 'r') as f:
+with open("2025\input\dec1.txt", 'r') as f:
   lines = [line.strip() for line in f if line.strip()]
   #print(len(lines))
 
@@ -51,28 +51,4 @@ def circular_index_rollover_counter(index, step):
   return new_index, hits
 
 
-with open("2025\dec1\input.txt", 'r') as f:
-  lines = [line.strip() for line in f if line.strip()]
-
-loc2 = 50
-counter2 = 0
-i = 1
-
-for line in lines:
-  dir = line[0:1]
-  dist = int(line[1:])
-  if dir == "R":
-    step = dist
-  if dir == "L":
-    step = -dist
-  
-  loc2, hits = circular_index_rollover_counter(loc2, step)
-  counter2 += hits
-  
-  if loc2 == 0:
-    counter2 += 1
-  print(i, dir, dist, " loc: ", loc2, " Count: ", hits, " Counter: ", counter2)
-  i += 1
-
-print(counter2)
 
