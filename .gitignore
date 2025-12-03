@@ -1,0 +1,15 @@
+# Ignore all files in the puzzleInput directories
+2025/puzzleInput/
+2024/puzzleInput/
+
+
+#Ignore TypeScript project files
+tsconfig.json
+package-lock.json
+package.json
+
+
+# Ignore node modules
+node_modules/
+
+.vscode/
