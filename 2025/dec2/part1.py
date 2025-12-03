@@ -1,4 +1,4 @@
-with open("2025\\dec2\\input.txt", 'r') as f:
+with open("2025\puzzleInput\inputDec2.txt", 'r') as f:
   line = f.readline().strip()
   ranges = line.split(",")
 

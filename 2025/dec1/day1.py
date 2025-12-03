@@ -4,7 +4,7 @@ def circular_index(index, step):
   return (index + step + n) % n
 
 
-with open("2025\dec1\input.txt", 'r') as f:
+with open("2025\puzzleInput\inputDec1.txt", 'r') as f:
   lines = [line.strip() for line in f if line.strip()]
   #print(len(lines))
 
