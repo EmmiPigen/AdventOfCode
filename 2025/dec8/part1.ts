@@ -5,7 +5,7 @@ inspect.defaultOptions.compact = true;
 
 // Read file and return lines
 function readLines(filePath: string) {
-  return fs.readFileSync(filePath, 'utf-8').trim().split('\r\n');
+  return fs.readFileSync(filePath, 'utf-8').trim().split(/\r?\n/);
 }
 
 // const lines = readLines('2025/dec8/inputTest.txt'); // Example input for testing
@@ -39,15 +39,10 @@ lines.forEach((line) => {
 // console.log(coordinates)
 
 function checkMap(m: Map<number, number[]>, key: number, entry: number[]) {
-  if (m.has(key)) {
-    let val = m.get(key);
-    // console.log(key);
-    entry.forEach((numb) => {
-      val?.push(numb);
-    });
-  } else {
-    m.set(key, entry);
+  if (!m.has(key)) {
+    m.set(key, [])
   }
+  m.get(key)?.push(...entry)
 }
 
 //Calculate all the possible distances
@@ -96,10 +91,10 @@ class disjoint_set_union {
   }
 
   find(i: number): number { // find the root element for the set that i belongs to
-    if(this.parent[i] == i){
-      return i;
+    if (this.parent[i] !== i) {
+      this.parent[i] = this.find(this.parent[i]!)
     }
-    return this.find(this.parent[i]!)
+    return this.parent[i];
   }
 
   unionBySize(x: number, y: number) {
@@ -123,28 +118,23 @@ const dsu = new disjoint_set_union(coordinates.length);
 
 for (let i = 0; i < 1000; i++) {
   let dist = distArray[i] as number;
-  let pair = distMap.get(dist) as number[];
+  let pair = distMap.get(dist) ?? []
   // console.log(pair)
 
-  if (pair.length == 2) {
-    let a = pair[0], b = pair[1];
+  for (let j = 0; j < pair.length - 1; j += 2) {
+    let a = pair[0] ?? 0, b = pair[1] ?? 0;
     // console.log('Union %d and %d', a, b)
-    dsu.unionBySize(a!, b!)
-  } else if (pair.length > 2) {
-    for (let j = 0; j < pair.length - 1; j += 2) {
-      let a = pair[j], b = pair[j + 1];
-      dsu.unionBySize(a!, b!)
-    }
+    dsu.unionBySize(a, b)
   }
 }
 
-// //Find the 3 largest circuits
+// //Find the 3 largest circuits after connecting the first 1000 pairs together
 const circuitSizes = Array.from(dsu.size)
 
 circuitSizes.sort((a, b) => b - a)
 
 let result = 1;
-for (let i = 0; i<3;i++){
+for (let i = 0; i < 3; i++) {
   // console.log(circuitSizes[i])
   result *= circuitSizes[i] ?? 1;
 }
