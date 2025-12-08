@@ -117,6 +117,7 @@ class disjoint_set_union {
 const dsu = new disjoint_set_union(coordinates.length);
 
 //Kruskal's algorithm to find the minimum spanning tree of the points where all points are connected with each other
+//https://en.wikipedia.org/wiki/Kruskal%27s_algorithm#
 function KruskalAlgorithm(dist: number[], dsu: disjoint_set_union, map: Map<number, number[]>): number[] {
   let lastPair: number[] = []
   for (let i = 0; i < dist.length; i++) {
@@ -146,5 +147,5 @@ const aCoordinate = coordinates[aIndex] ?? [0], bCoordinate = coordinates[bIndex
 
 if (aCoordinate[0] && bCoordinate[0]) {
   const result = aCoordinate[0] * bCoordinate[0]
- console.log("%d * %d = %d", aCoordinate[0], bCoordinate[0], result)
+  console.log("%d * %d = %d", aCoordinate[0], bCoordinate[0], result)
 }
