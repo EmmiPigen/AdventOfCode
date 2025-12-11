@@ -92,6 +92,43 @@ function depthFirstSearch(row: number, col: number, curPath: Array<number>) {
 }
 
 
+const memo = new Map<string, number>();
+
+// function countPaths(row: number, col: number): number {
+//   const key = `${row},${col}`;
+  
+//   // 1. Check if we already know how many paths stem from here
+//   if (memo.has(key)) return memo.get(key)!;
+
+//   // 2. Boundary / Dead-end check
+//   if (row >= lineCopy.length || col < 0 || col >= lineCopy[0]!.length || lineCopy[row][col] === '.') {
+//     return 0;
+//   }
+
+//   // 3. Success condition (Bottom row)
+//   if (row === lineCopy.length - 1) {
+//     return 1;
+//   }
+
+//   const space = lineCopy[row][col];
+//   let localPaths = 0;
+
+//   // 4. Recursive branching
+//   if (space === 'S' || space === '|') {
+//     localPaths += countPaths(row + 1, col);
+//   } else if (space === '^') {
+//     localPaths += countPaths(row + 1, col - 1);
+//     localPaths += countPaths(row + 1, col + 1);
+//   }
+
+//   // 5. Store total for this node and return
+//   memo.set(key, localPaths);
+//   return localPaths;
+// }
+
+// const totalFound = countPaths(0, startCol);
+// console.log("Total unique paths:", totalFound);
+
 depthFirstSearch(0, lines[0]!.indexOf("S"), [])
 
 console.log("All paths: ", paths)
