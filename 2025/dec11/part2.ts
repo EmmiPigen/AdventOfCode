@@ -8,13 +8,10 @@ function readLines(filePath: string) {
   return fs.readFileSync(filePath, 'utf-8').trim().split(/\r?\n/);
 }
 
-// const lines = readLines('2025/dec11/inputTest.txt'); // Example input for testing
+// const lines = readLines('2025/dec11/inputTestP2.txt'); // Example input for testing
 const lines = readLines('2025/input/dec11.txt'); // Uncomment for real input
 
-console.log(lines)
-
-const devicesList: string[] = [];
-const connsList: string[][] = [];
+// console.log(lines)
 
 
 class directedGraph {
@@ -59,10 +56,6 @@ class directedGraph {
 
 let g = new directedGraph(lines.length);
 
-for (const device of devicesList) {
-  g.addVertex(device)
-}
-
 lines.forEach(line => {
   let splitIndex = line.indexOf(":")
   let d = line.slice(0, splitIndex);
@@ -74,43 +67,52 @@ lines.forEach(line => {
 // g.printGraph()
 
 
-const memo = new Map<string, number>();
-
-function dfsUtil(node: string, goal: string) {
+// const memo = new Map();
+function dfsUtil(node: string, goal: string, memo: Map<string, number>): number {
   // console.log("Visiting node: ", node);
   const key = node;
 
   // 1. Check if we already know how many paths stem from here
-  if (memo.has(key)) return memo.get(key)!
+  if (memo.has(key)) return memo.get(key)!;
 
-  // 2. Check if we've reached the goal
-  if (node == goal) {
+  // 2. If we reached the goal, or reached the out
+  if (node === goal){
     return 1;
   }
-
-  // 3. Explore neighbors
-  let neighbors = g.adjList.get(node)
-  // console.log(neighbors);
-  let paths = 0;
-
-  for(const n of neighbors!) {
-    paths += dfsUtil(n, goal)
+  if (node === 'out'){
+    return 0;
   }
 
-  memo.set(key, paths)
-  return paths;
+  let neighbors = g.adjList.get(node);
+  let localPaths = 0;
+
+  for (const n of neighbors!) {
+    localPaths += dfsUtil(n, goal, memo);
+  }
+
+  memo.set(key, localPaths)
+  return localPaths
 }
 
 
+const badPaths: string[][] = []
+
 function depthFirstSearch(g: directedGraph) {
   // Initialize the count of unique paths
-  let uniquePaths = 0;
+  let uniquePaths = 1;
   // Set the starting node and goal node
-  let start = 'you';
-  let goal = 'out';
-
+  let sequenceList = ['svr', 'fft', 'dac', 'out'];
+  
   // Calculate the number of unique paths from start to goal
-  uniquePaths = dfsUtil(start, goal);
+  for (let i = 0; i < sequenceList.length - 1; i++) {
+    const memo = new Map<string, number>();
+    let start = sequenceList[i];
+    let goal = sequenceList[i + 1];
+    
+    let segmentPaths = dfsUtil(start!, goal!, memo);
+    console.log(`Paths from ${start} to ${goal}: `, segmentPaths);
+    uniquePaths *= segmentPaths
+  }
 
   // Return the total count of unique paths
   return uniquePaths;

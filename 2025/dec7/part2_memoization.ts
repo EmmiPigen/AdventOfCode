@@ -132,3 +132,31 @@ const memo = new Map<string, number>();
 depthFirstSearch(0, lines[0]!.indexOf("S"), [])
 
 console.log("All paths: ", paths)
+
+
+let pathCount = 0;
+
+// function depthFirstSearch(row: number, col: number, curPath: Array<number>) {
+//   // Boundary check
+//   if (row >= lineCopy.length || col < 0 || col >= lineCopy[0]!.length || lineCopy[row][col] === '.') {
+//     return;
+//   }
+
+//   const space = lineCopy[row][col];
+//   const newPath = [...curPath, col]; // Store column index as requested
+
+//   // If bottom is reached, report and finish
+//   if (row === lineCopy.length - 1) {
+//     pathCount++;
+//     console.log(`Path ${pathCount}:`, JSON.stringify(newPath));
+//     return;
+//   }
+
+//   // Branching logic
+//   if (space === 'S' || space === '|') {
+//     depthFirstSearch(row + 1, col, newPath);
+//   } else if (space === '^') {
+//     depthFirstSearch(row + 1, col - 1, newPath);
+//     depthFirstSearch(row + 1, col + 1, newPath);
+//   }
+// }

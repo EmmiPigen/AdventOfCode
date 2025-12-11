@@ -11,11 +11,7 @@ function readLines(filePath: string) {
 // const lines = readLines('2025/dec11/inputTest.txt'); // Example input for testing
 const lines = readLines('2025/input/dec11.txt'); // Uncomment for real input
 
-console.log(lines)
-
-const devicesList: string[] = [];
-const connsList: string[][] = [];
-
+// console.log(lines)
 
 class directedGraph {
   nVertices: number;
@@ -59,9 +55,6 @@ class directedGraph {
 
 let g = new directedGraph(lines.length);
 
-for (const device of devicesList) {
-  g.addVertex(device)
-}
 
 lines.forEach(line => {
   let splitIndex = line.indexOf(":")
@@ -87,6 +80,10 @@ function dfsUtil(node: string, goal: string) {
   if (node == goal) {
     return 1;
   }
+  
+  if (node == 'out') {
+    return 0;
+  }
 
   // 3. Explore neighbors
   let neighbors = g.adjList.get(node)
@@ -106,8 +103,8 @@ function depthFirstSearch(g: directedGraph) {
   // Initialize the count of unique paths
   let uniquePaths = 0;
   // Set the starting node and goal node
-  let start = 'you';
-  let goal = 'out';
+  let start = 'fft';
+  let goal = 'dac';
 
   // Calculate the number of unique paths from start to goal
   uniquePaths = dfsUtil(start, goal);
