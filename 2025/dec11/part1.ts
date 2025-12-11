@@ -103,20 +103,17 @@ function dfsUtil(node: string, goal: string) {
 
 
 function depthFirstSearch(g: directedGraph) {
+  // Initialize the count of unique paths
   let uniquePaths = 0;
+  // Set the starting node and goal node
+  let start = 'you';
   let goal = 'out';
 
-  const queue = new Denque();
+  // Calculate the number of unique paths from start to goal
+  uniquePaths = dfsUtil(start, goal);
 
-  //Nodes can be visited multiple times, but only once per path. So just adding each node is not enough, It needs to be tracked per path
-  const visited = new Set<string>();
-
-  let start = 'you';
-  queue.push(start);
-
-  uniquePaths = dfsUtil(start, goal)
-
-  return uniquePaths
+  // Return the total count of unique paths
+  return uniquePaths;
 }
 
 
